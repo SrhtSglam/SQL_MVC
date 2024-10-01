@@ -1,0 +1,55 @@
+
+@model UsersViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ekranı</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<div class="login-container">
+    <h2 class="text-center">Kayıt Yap</h2>
+    @* <form action="login" method="POST"> *@
+    @using (Html.BeginForm()){
+        <div class="form-group">
+            <label for="username">Kullanıcı Adı</label>
+            @ViewBag.Message
+            <input type="text" class="form-control" id="username" name="UserName" required>
+        </div>
+        <div class="form-group">
+            <label for="Password">Şifre</label>
+            <input type="password" class="form-control" id="Password" name="Password" required>
+        </div>
+        @* <form action="Sign" method="post"> *@
+            <button type="submit" class="btn btn-primary btn-block">Kayıt Yap</button>
+        @* </form> *@
+    @* </form> *@
+    }
+    <p class="text-center mt-3">
+        <a href="#">Şifremi unuttum?</a>
+    </p>
+    <p class="text-center">
+        Henüz bir hesabınız yok mu? <a href="#">Kayıt Ol</a>
+    </p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
