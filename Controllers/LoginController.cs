@@ -1,5 +1,6 @@
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc;
+using SQL_MVC.Models;
 
 public class LoginController : Controller{
     public LoginController(){
@@ -8,17 +9,19 @@ public class LoginController : Controller{
 
     public IActionResult Sign(){
         SqlLINQ();
+        return View(new UsersViewModel());
+    }
+
+    [HttpPost]
+    public IActionResult Sign(UsersViewModel model){
+        SqlLINQ();
+        for (int i = 0; i < users.Count(); i++)
+        if(model.UserName == users[i].UserName && model.Password == users[i].Password){
+            return View("../Home/Index", users);
+        }
         return View();
     }
 
-    public IActionResult SignIn(string usr, string psw){
-        for(int i=0; i < users.Count(); i++){
-            if(usr == users[i].UserName){
-                return View("DataList", users);
-            }
-            
-        }
-    }
 
     public List<Users> users = new List<Users>();
 
@@ -31,6 +34,7 @@ public class LoginController : Controller{
         string query = "SELECT * FROM dbo.PersonLogin PL";
         SqlCommand cmd = new SqlCommand(query, connect);
         SqlDataReader dr = cmd.ExecuteReader();
+        users.Clear();
         while(dr.Read()){
             users.Add(new Users(){
                 UserName = dr["UserName"].ToString(),
