@@ -45,8 +45,8 @@ public class ReginController : Controller{
         users.Clear();
         while(dr.Read()){
             users.Add(new Users(){
-                UserName = dr["UserName"].ToString(),
-                Password = dr["Password"].ToString()
+                UserName = dr["UserName"].ToString()!,
+                Password = dr["Password"].ToString()!
             });
         }
         
